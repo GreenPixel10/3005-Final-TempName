@@ -1,16 +1,24 @@
 from input_helper import *
 
+from credentials import *
 
-menu = ["World peace",
-        "Hamburger",
-        "Launch warheads"]
+from user_defs import *
 
 
-print(get_text_input("Enter your name", 4))
-print()
 
-print(get_number_input("Enter your age", 25, 36))
-print()
+user = user_class(0)
+          
 
-print(get_menu_input("What would you like to do?", menu))
-print()
+def __main__():
+
+     print("welcome yada yada")
+
+     choice = get_menu_input("What would you like to do?", ["Login", "Register"])
+
+     match choice:
+          case 0: user = log_in()
+          case 1: user = register()
+
+     user.show_options(user)
+
+__main__()
