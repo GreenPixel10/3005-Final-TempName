@@ -1,5 +1,7 @@
 
 promptchar = "-> "
+days = [31,28,31,30,31,30,31,31,30,31,30,31]
+months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
      
 def get_text_input(prompt, charlim = 0):
@@ -37,4 +39,49 @@ def get_menu_input(prompt, items):
      for i in range(len(items)):
           print(str(i)+":", items[i])
      return get_number_input("Enter your choice by number", 0, len(items)-1)
+     
+
+def get_email_input(prompt):
+     while True:
+          email = get_text_input(prompt, 129)
+          emailsplit = email.split("@")
+          if len(emailsplit) == 2 and emailsplit[0] and emailsplit[1]:
+               domain = emailsplit[1]
+               domainsplit = domain.split(".")
+               #if there's at least 1 dot AND every split section has something in it
+               if len(domainsplit) >= 2 and sum(bool(i) for i in domainsplit) == len(domainsplit): 
+                    return email
+               
+          print("Invalid email format")
+
+
+def get_date_input(prompt):
+     print(prompt)
+     year = get_number_input("Enter a year", 1, 9999)
+     month = get_number_input("Enter a month", 1, 12)
+     leap = int(month == 2 and ((year % 4 == 0) and ((year % 100 != 0) or (year % 400 == 0)))) #=1 if leap year
+     day = get_number_input("Enter a day", 1, days[month-1] + leap)
+     return (year, month, day)
+     
+     
+def get_time_input(prompt, with_seconds = False):
+     print(prompt)
+     hours = get_number_input("Enter hour value", 0, 23)
+     minutes = get_number_input("Enter minute value", 0, 59)
+     seconds = 0
+     if with_seconds: seconds = get_number_input("Enter seconds value", 0, 59)
+     return (hours, minutes, seconds)
+     
+
+####formatters####
+     
+def format_date(date): #pass in (y,m,d)
+     return months[date[1] - 1] + " " + str(date[2]) + ", " + str(date[0])
+
+
+def format_time(time, with_seconds = False): #pass in (h,m,s)
+     return str(time[0]) + ":" + str(time[1]) + (str(time[2]) if with_seconds else "" )
+
+
+
      
