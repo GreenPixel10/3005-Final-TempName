@@ -73,15 +73,3 @@ def get_time_input(prompt, with_seconds = False):
      return (hours, minutes, seconds)
      
 
-####formatters####
-     
-def format_date(date): #pass in (y,m,d)
-     return months[date[1] - 1] + " " + str(date[2]) + ", " + str(date[0])
-
-
-def format_time(time, with_seconds = False): #pass in (h,m,s)
-     return str(time[0]) + ":" + str(time[1]) + (str(time[2]) if with_seconds else "" )
-
-
-
-     
