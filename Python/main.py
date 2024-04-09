@@ -2,6 +2,7 @@ from input_helper import *
 from credentials import *
 from trainer import *
 from sql_helper import *
+from admin import *
 
 
 
@@ -29,7 +30,12 @@ def __main__():
 
      #when a admin logs in
      if perm == 1:
-          exit()
+          while(True):
+               choice = get_menu_input("What would you like to do?", ["Room Booking Management","Monitor Equipment","View Billing History"])
+               match choice:
+                    case 0: manage_rooms()
+                    case 1: monitor_equipment()
+                    case 2: exit()
      #when a trainer logs in
      if perm == 2:
           while(True):
