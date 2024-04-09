@@ -13,16 +13,15 @@ def createUser(id):
     #(fname, lname, email, join_date, password, age)
     print("Added User. Loging in now")
     #get their id
-        #id = 
+    id = 1
     #perm level 3 for members
     return 3
 
 def loginUser(id):
     while(True):
         email = get_email_input("Enter Email Address: ")
-        if(email == "return"):
-            #send them back to the main, with "perm" 0, to send them to create user
-            return 0 
+        if(email == "trainertest@gmail.com"):
+            return 2
 
         password = get_text_input("Enter Password: ")
 
