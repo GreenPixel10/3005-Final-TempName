@@ -3,7 +3,7 @@ from datetime import date
 
 def createUser(id):
     email = get_email_input("Enter Email Address: ")
-    password = get_text_input("Enter Password: ")
+    password = get_new_password("Enter Password: ")
     fname = get_text_input("Enter First Name: ")
     lname = get_text_input("Enter Last Name: ")
     age = get_number_input("Enter Age: ")
@@ -21,18 +21,20 @@ def loginUser(id):
     while(True):
         email = get_email_input("Enter Email Address: ")
         if(email == "trainertest@gmail.com"):
-            return 2
+            return
+        if(email == "membertest@gmail.com"):
+            return 3
 
         password = get_text_input("Enter Password: ")
 
         #check if admin has this user
-            #id = 
+            #id =
             #return 1 (permission level)
         #check if trainer has this user
-            #id = 
+            #id =
             #return 2 (permission level)
         #check if member has this user
-            #id = 
+            #id =
             #return 3 (permission level)
         #if no one has this user:
         choice = get_menu_input("Username or Password is incorrect.", ["Create a New User", "Try Again"])
@@ -40,8 +42,3 @@ def loginUser(id):
         match choice:
             case 0: return 0
             case 1: continue
-
-
-    
-
-

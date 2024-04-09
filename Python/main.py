@@ -1,6 +1,7 @@
 from input_helper import *
 from credentials import *
 from trainer import *
+from profile_management import *
 from sql_helper import *
 
 
@@ -14,12 +15,12 @@ def __main__():
 
      #print(format_time(get_time_input("Time")))
 
-     
+
 
      choice = get_menu_input("What would you like to do?", ["Login", "Register"])
 
      match choice:
-          case 0: 
+          case 0:
                #perm is permission level (1 admin, 2 trainer, 3 member)
                #id is the id of the user from the table
                perm = loginUser(id)
@@ -41,13 +42,17 @@ def __main__():
                          search_member(fname, lname)
                     case 1: view_unavailibility(id)
                     case 2: edit_unavailibility(id)
-          
+
 
      #when a member logs in
      if perm == 3:
-          exit()
-          
+           choice = get_menu_input("What would you like to access?", ["Personal information", "Fitness goals", "Exercise Logging", "Dashboard Display", "Schedule Management"])
+           match choice:
+                case 0:
+                     update_personal_info()
+                #case 1: view_unavailibility(id)
+                #case 2: edit_unavailibility(id)
+
 
 
 __main__()
- 
