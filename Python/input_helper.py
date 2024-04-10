@@ -115,11 +115,10 @@ def get_time_input(prompt, with_seconds = False):
      if with_seconds: seconds = get_number_input("Enter seconds value", 0, 59)
      return (hours, minutes, seconds)
 
-
- def get_bool_input(prompt):
-      print(prompt)
-      choice = get_text_input("Yes or No: ")
-      if choice == "yes" or choice == "Yes":
-           return True
-      else:
-           return False
+def get_bool_input(prompt):
+     print(prompt)
+     choice = get_text_input("Yes or No: ")
+     if choice == "yes" or choice == "Yes":
+          return True
+     else:
+          return False

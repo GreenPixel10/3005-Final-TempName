@@ -12,6 +12,7 @@ def display_excercises():
           print(i)
 
 def display_current_bests():
+    pass
 
 def display_health_stats():
      avgs = get_averages()
@@ -48,4 +49,3 @@ def average_index(items, index):
      for i in items:
           total += i[index]
      return total/len(items)
-          
