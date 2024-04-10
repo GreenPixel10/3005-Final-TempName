@@ -113,7 +113,7 @@ def get_time_input(prompt, with_seconds = False):
      minutes = get_number_input("Enter minute value", 0, 59)
      seconds = 0
      if with_seconds: seconds = get_number_input("Enter seconds value", 0, 59)
-     return (hours, minutes, seconds)
+     return "" + str(hours) + ":"+str(minutes)+":"+str(seconds)
 
 def get_bool_input(prompt):
      print(prompt)
