@@ -1,15 +1,16 @@
 from input_helper import *
+from sql_helper import *
 def view_unavailibility(id):
-    #use id to pull up the trainers unavailibility from id
     print("Here is your unavailibility: ")
-    #splice the data, and output:
-    #for blah blah blah
-        #print(i)
+    get_unavailibility(id)
+
 
 
 def search_member(fname, lname):
-    #search member by names
-    #print all the info about that member (maybe actually run their like check stats and stuff)
+    member_id = get_id_from_name(fname, lname, "Member")
+    print_member_info(member_id)
+    print_fitness_goals(member_id)
+    print_exercise(member_id)
     return
     
 
@@ -21,13 +22,16 @@ def edit_unavailibility(id):
         case 0: 
             time = get_time_input("What time would you like to add? ", False)
             date = get_number_input("What day of the week? (1-7, starting on Monday)")
-            #check if that timeslot exists
-                #create timeslot var with time and date
-            #get timeslot id
-            #add timeslot to unavailibility with timeslot id and trainer id
+            time_id = get_timeslot(time, date)
+            if time_id == 0:
+                time_id = create_timeslot(time, date)
+            
+            add_unavailibility(id, time_id)
         case 1:
             time = get_time_input("What time would you like to remove? ", False)
             date = get_number_input("What day of the week? (1-7, starting on Monday)")
-            #find timeslot id from time and date
-            #remove it from the unavailibility table 
+            time_id = get_timeslot(time, date)
+            if time_id == 0: return
+            remove_unavailibility(id, time_id)
+
 

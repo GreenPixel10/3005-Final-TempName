@@ -8,9 +8,8 @@ from sql_helper import *
 from admin import *
 
 
-
 def __main__():
-
+     id = 1
      while True:
 
          choice = get_menu_input("What would you like to do?", ["Login", "Register", "Exit"])
@@ -19,10 +18,10 @@ def __main__():
               case 0:
                    #perm is permission level (1 admin, 2 trainer, 3 member)
                    #id is the id of the user from the table
-                   perm = loginUser(id)
+                   perm, id = loginUser(id)
                    if perm == 0:
-                        perm = createUser(id)
-              case 1: perm = createUser(id)
+                        perm, id = createUser(id)
+              case 1: perm, id = createUser(id)
               case 2: exit()
 
          while True:
@@ -33,7 +32,7 @@ def __main__():
                        match choice:
                             case 0: manage_rooms()
                             case 1: monitor_equipment()
-                            case 2: pass
+                            case 2: view_billing()
                             case 3: break
              #when a trainer logs in
              if perm == 2:
@@ -55,7 +54,7 @@ def __main__():
                         case 0: update_personal_info()
                         case 1: fitness_goals()
                         case 2: excercise_logging()
-                        case 3: dashboard_display()
+                        case 3: pass #dashboard_display()
                         case 4: schedule_management()
                         case 5: break
 

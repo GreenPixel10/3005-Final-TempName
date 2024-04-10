@@ -1,15 +1,15 @@
-INSERT INTO Member (first_name, last_name, email, join_date, password, age) VALUES
-('John', 'Doe', 'john.doe@example.com', '2023-09-01', 'johnGotThatDoe27', 79),
-('Jane', 'Smith', 'jane.smith@example.com', '2023-09-01', 'ryanGoslingFan42', 23),
-('Jim', 'Beam', 'jim.beam@example.com', '2023-09-02', 'beamMachine88', 9);
+INSERT INTO Member (member_id,first_name, last_name, email, join_date, password, age) VALUES
+(1,'John', 'Doe', 'john.doe@example.com', '2023-09-01', 'johnGotThatDoe27', 79),
+(2,'Jane', 'Smith', 'jane.smith@example.com', '2023-09-01', 'ryanGoslingFan42', 23),
+(3,'Jim', 'Beam', 'jim.beam@example.com', '2023-09-02', 'beamMachine88', 9);
 
-INSERT INTO Trainer (first_name, last_name, email, password) VALUES
-('Randy', 'Lahey', 'randy.lahey@example.com', 'laheySucks37'),
-('Mathew', 'Stove', 'mathew.stove@example.com', 'grapeSodiesRule11');
+INSERT INTO Trainer (trainer_id,first_name, last_name, email, password) VALUES
+(1,'Randy', 'Lahey', 'randy.lahey@example.com', 'laheySucks37'),
+(2,'Mathew', 'Stove', 'mathew.stove@example.com', 'grapeSodiesRule11');
 
-INSERT INTO Admin (first_name, last_name, email, password) VALUES
-('Neo', 'FromTheMatix', 'neo.fromthematrix@example.com', 'color 0A'),
-('Walter', 'White', 'walter.white@example.com', 'jesseFan37');
+INSERT INTO Admin (admin_id,first_name, last_name, email, password) VALUES
+(1,'Neo', 'FromTheMatix', 'neo.fromthematrix@example.com', 'color 0A'),
+(2,'Walter', 'White', 'walter.white@example.com', 'jesseFan37');
 
 INSERT INTO FitnessGoal (member_id, current_best, goal_value, type_of_goal) VALUES
 (1, 20, 18, 'Run 5k In (minutes)'),
@@ -33,12 +33,12 @@ INSERT INTO Exercise (member_id, description, date, time, blood_pressure, heartr
 (3, 'Swam 28 laps', '2024-03-12', '19:10:00', 135, 132, 170),
 (3, 'Lifted weighs for 12 minutes', '2024-03-11', '23:11:00', 135, 123, 169);
 
-INSERT INTO Room (name) VALUES
-('weight'),
-('treadmill'),
-('pool'),
-('openRoom1'),
-('openRoom2');
+INSERT INTO Room (room_id,name) VALUES
+(1,'weight'),
+(2,'treadmill'),
+(3,'pool'),
+(4,'openRoom1'),
+(5,'openRoom2');
 
 INSERT INTO Equipment (equipment_serial, equipment_type, room_id, date_of_last_maintenance) VALUES
 (123451, 'Treadmill', 2, '2023-09-12'),
@@ -46,12 +46,66 @@ INSERT INTO Equipment (equipment_serial, equipment_type, room_id, date_of_last_m
 (123453, 'Treadmill', 2, '2023-09-12'),
 (123454, 'Treadmill', 4, '2023-09-12'),
 (123455, 'Treadmill', 5, '2023-09-12'),
-(124225, 'Reactor Core', 3, '1956-03-22');
+(124225, 'Reactor Core', 3, '1956-03-22'),
 (124221, 'Bench', 1, '2023-06-23'),
 (124222, 'Bench', 1, '2023-06-23'),
 (124223, 'Bench', 1, '2023-06-23'),
 (124224, 'Bench', 4, '2023-06-23'),
-(124225, 'Bench', 4, '2023-06-23');
+(124226, 'Bench', 4, '2023-06-23');
+
+
+INSERT INTO Timeslot (timeslot_id, time, day_of_the_week) VALUES
+(1, '06:00:00', 3), (2, '07:00:00', 3), (3, '08:00:00', 3), 
+(4, '09:00:00', 3), (5, '10:00:00', 3), (6, '11:00:00', 3), 
+(7, '13:00:00', 3), (8, '14:00:00', 3), (9, '15:00:00', 3), 
+(10, '16:00:00', 3), (11, '17:00:00', 3), (12, '18:00:00', 3), 
+(13, '19:00:00', 3), (14, '20:00:00', 3), (15, '06:00:00', 4), 
+(16, '07:00:00', 4), (17, '08:00:00', 4), (18, '09:00:00', 4), 
+(19, '10:00:00', 4), (20, '11:00:00', 4), (21, '13:00:00', 4), 
+(22, '14:00:00', 4), (23, '15:00:00', 4), (24, '16:00:00', 4), 
+(25, '17:00:00', 4), (26, '18:00:00', 4), (27, '19:00:00', 4), 
+(28, '20:00:00', 4), (29, '06:00:00', 5), (30, '07:00:00', 5), 
+(31, '08:00:00', 5), (32, '09:00:00', 5), (33, '10:00:00', 5), 
+(34, '11:00:00', 5), (35, '13:00:00', 5), (36, '14:00:00', 5), 
+(37, '15:00:00', 5), (38, '16:00:00', 5), (39, '17:00:00', 5), 
+(40, '18:00:00', 5), (41, '19:00:00', 5), (42, '20:00:00', 5), 
+(43, '06:00:00', 6), (44, '07:00:00', 6), (45, '08:00:00', 6), 
+(46, '09:00:00', 6), (47, '10:00:00', 6), (48, '11:00:00', 6), 
+(49, '13:00:00', 6), (50, '14:00:00', 6), (51, '15:00:00', 6), 
+(52, '16:00:00', 6), (53, '17:00:00', 6), (54, '18:00:00', 6), 
+(55, '19:00:00', 6), (56, '20:00:00', 6), (57, '06:00:00', 7), 
+(58, '07:00:00', 7), (59, '08:00:00', 7), (60, '09:00:00', 7), 
+(61, '10:00:00', 7), (62, '11:00:00', 7), (63, '13:00:00', 7), 
+(64, '14:00:00', 7), (65, '15:00:00', 7), (66, '16:00:00', 7), 
+(67, '17:00:00', 7), (68, '18:00:00', 7), (69, '19:00:00', 7), 
+(70, '20:00:00', 7);
+
+
+
+INSERT INTO Session (session_id,trainer_id, room_id, timeslot_id, group_session, price) VALUES
+(1, 1, 3, 1, False, 45),
+(2, 2, 4, 2, True, 45),
+(3, 2, 3, 3, False, 45),
+(4, 1, 3, 4, False, 45),
+(5, 1, 3, 5, False, 45),
+(6, 1, 3, 6, False, 45),
+(7, 2, 3, 7, False, 45),
+(8, 1, 3, 8, False, 45),
+(9, 2, 3, 9, False, 45),
+(10, 1, 1, 10, False, 45),
+(11, 1, 5, 11, True, 45),
+(12, 1, 4, 12, True, 45);
+
+INSERT INTO Signed_up_for (member_id, session_id, date) VALUES
+(1, 1, '2023-06-23'),
+(1, 2, '2023-04-23'),
+(1, 3, '2023-04-23'),
+(2, 2, '2023-08-23'),
+(2, 7, '2023-08-23'),
+(3, 8, '2024-01-23');
+
+
+
 
 INSERT INTO Unavailability (trainer_id, timeslot_id) VALUES
 (1, 51),
@@ -68,36 +122,9 @@ INSERT INTO Unavailability (trainer_id, timeslot_id) VALUES
 (2, 57),
 (2, 58);
 
-INSERT INTO Session (trainer_id, room_id, timeslot_id, group_session, price) VALUES
-(1, 3, 36, False, 45),
-(2, 4, 36, True, 45),
-(2, 3, 63, False, 45),
-(1, 3, 26, False, 45),
-(1, 3, 38, False, 45),
-(1, 3, 10, False, 45),
-(2, 3, 1, False, 45),
-(1, 3, 67, False, 45),
-(2, 3, 48, False, 45),
-(1, 1, 49, False, 45),
-(1, 5, 49, True, 45),
-(1, 4, 46, True, 45);
-
-INSERT INTO Signed_up_for (member_id, session_id, date) VALUES
-(1, 1, '2023-06-23'),
-(1, 2, '2023-04-23'),
-(1, 3, '2023-04-23'),
-(2, 2, '2023-08-23'),
-(2, 7, '2023-08-23'),
-(3, 8, '2024-01-23');
-
-INSERT INTO Timeslot (time, day_of_the_week) VALUES
-('06:00:00', 3), ('07:00:00', 3), ('08:00:00', 3), ('09:00:00', 3), ('10:00:00', 3), ('11:00:00', 3), 
-('13:00:00', 3), ('14:00:00', 3), ('15:00:00', 3), ('16:00:00', 3), ('17:00:00', 3), ('18:00:00', 3), ('19:00:00', 3), ('20:00:00', 3), 
-('06:00:00', 4), ('07:00:00', 4), ('08:00:00', 4), ('09:00:00', 4), ('10:00:00', 4), ('11:00:00', 4), 
-('13:00:00', 4), ('14:00:00', 4), ('15:00:00', 4), ('16:00:00', 4), ('17:00:00', 4), ('18:00:00', 4), ('19:00:00', 4), ('20:00:00', 4), 
-('06:00:00', 5), ('07:00:00', 5), ('08:00:00', 5), ('09:00:00', 5), ('10:00:00', 5), ('11:00:00', 5), 
-('13:00:00', 5), ('14:00:00', 5), ('15:00:00', 5), ('16:00:00', 5), ('17:00:00', 5), ('18:00:00', 5), ('19:00:00', 5), ('20:00:00', 5), 
-('06:00:00', 6), ('07:00:00', 6), ('08:00:00', 6), ('09:00:00', 6), ('10:00:00', 6), ('11:00:00', 6), 
-('13:00:00', 6), ('14:00:00', 6), ('15:00:00', 6), ('16:00:00', 6), ('17:00:00', 6), ('18:00:00', 6), ('19:00:00', 6), ('20:00:00', 6), 
-('06:00:00', 7), ('07:00:00', 7), ('08:00:00', 7), ('09:00:00', 7), ('10:00:00', 7), ('11:00:00', 7), 
-('13:00:00', 7), ('14:00:00', 7), ('15:00:00', 7), ('16:00:00', 7), ('17:00:00', 7), ('18:00:00', 7), ('19:00:00', 7), ('20:00:00', 7);
+ALTER SEQUENCE Timeslot_timeslot_id_seq RESTART WITH 71;
+ALTER SEQUENCE Session_session_id_seq RESTART WITH 13;
+ALTER SEQUENCE Room_room_id_seq RESTART WITH 6;
+ALTER SEQUENCE Member_member_id_seq RESTART WITH 4;
+ALTER SEQUENCE Trainer_trainer_id_seq RESTART WITH 3;
+ALTER SEQUENCE Admin_admin_id_seq RESTART WITH 3;

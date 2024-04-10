@@ -64,3 +64,11 @@ def monitor_equipment():
             equipment_id = get_number_input("What is the id of the equipment that got maintained?")
             #update the last maintained date to today
 
+
+
+
+
+def view_billing():
+    #print all the payments
+    return
+
