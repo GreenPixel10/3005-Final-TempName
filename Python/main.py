@@ -51,7 +51,7 @@ def __main__():
              if perm == 3:
                    choice = get_menu_input("What would you like to access?", ["Personal information", "Fitness goals", "Exercise Logging", "Dashboard Display", "Schedule Management", "Log Out"])
                    match choice:
-                        case 0: update_personal_info()
+                        case 0: update_personal_info(id)
                         case 1: fitness_goals()
                         case 2: excercise_logging()
                         case 3: pass #dashboard_display()

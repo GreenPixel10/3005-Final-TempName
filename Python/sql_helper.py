@@ -27,11 +27,11 @@ def get_id_from_name(fname,lname,table):
     elif(table == "Trainer"): id = "trainer_id"
     elif(table == "Admin"): id = "admin_id"
     else:
-        print("Error get_id_from_name") 
+        print("Error get_id_from_name")
         exit()
     cur.execute("SELECT {} FROM {} WHERE first_name = '{}' AND last_name = '{}'".format(id, table, fname, lname))
     ret_id = cur.fetchone()
-    ret_id = ret_id[0] 
+    ret_id = ret_id[0]
     cur.close()
     conn.close()
     return ret_id
@@ -43,7 +43,7 @@ def check_creds(email,password,table):
     elif(table == "Trainer"): id = "trainer_id"
     elif(table == "Admin"): id = "admin_id"
     else:
-        print("Error check_creds") 
+        print("Error check_creds")
         exit()
     cur.execute("SELECT {} FROM {} WHERE email = '{}' AND password = '{}'".format(id,table,email, password))
     user_id = cur.fetchone()
@@ -156,7 +156,7 @@ def remove_unavailibility(trainer_id, time_id):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     cur.execute("DELETE FROM unavailability WHERE trainer_id = '{}' AND timeslot_id = '{}'".format(trainer_id, time_id))
-    
+
     conn.commit()
     cur.close()
     conn.close()
@@ -179,7 +179,7 @@ def get_room_id_from_name(name):
 
     cur.execute("SELECT room_id FROM Room WHERE name = '{}'".format(name))
     ret_id = cur.fetchone()
-    ret_id = ret_id[0] 
+    ret_id = ret_id[0]
     cur.close()
     conn.close()
     return ret_id
@@ -199,7 +199,7 @@ def session_update(session_id,newVal,updateMe):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     cur.execute("UPDATE Session SET {} = '{}' WHERE session_id = {}".format(updateMe, newVal, session_id))
-    
+
     conn.commit()
     cur.close()
     conn.close()
@@ -209,7 +209,7 @@ def remove_session(session_id):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     cur.execute("DELETE FROM session WHERE session_id = '{}'".format(session_id))
-    
+
     conn.commit()
     cur.close()
     conn.close()
@@ -233,7 +233,7 @@ def maintain_eq(serial):
     cur = conn.cursor()
     day = date.today()
     cur.execute("UPDATE equipment SET date_of_last_maintenance = '{}' WHERE equipment_serial = {}".format(day,serial))
-    
+
     conn.commit()
     cur.close()
     conn.close()
@@ -251,5 +251,20 @@ def print_signed_up_for():
         mem_id, session_id, date = info
         print("Member Id: " + str(mem_id) + " | Session id: " + str(session_id) + " | Date of transaction: " + str(date))
 
+    cur.close()
+    conn.close()
+
+
+
+    #########
+
+
+
+def update_userinfo_field(id, field, value):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("UPDATE Member SET {} = '{}' WHERE member_id = {}".format(field, value, id))
+
+    conn.commit()
     cur.close()
     conn.close()

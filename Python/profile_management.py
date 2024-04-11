@@ -1,55 +1,57 @@
 from input_helper import *
+from sql_helper import *
 import random
 
 
-def update_personal_info():
+def update_personal_info(id):
     print()
     options = ["First name", "Last Name", "Email", "Password", "Age", "Cancel (Go Back)"]
     while True:
-        print()
+        print_member_info(id)
         choice = get_menu_input("What would you like to update?", options)
 
         match choice:
             case 0:
-                update_profile_first_name()
+                update_profile_first_name(id)
             case 1:
-                update_profile_last_name()
+                update_profile_last_name(id)
             case 2:
-                update_profile_email()
+                update_profile_email(id)
             case 3:
-                update_profile_password()
+                update_profile_password(id)
             case 4:
-                update_profile_age()
+                update_profile_age(id)
             case 5:
                 return
 
-def update_profile_first_name():
+def update_profile_first_name(id):
     fname = get_text_input("Enter the new first name")
-    #update account
-def update_profile_last_name():
-    lname = get_text_input("Enter the new last name")
-    #update account
+    update_userinfo_field(id, "first_name", fname)
 
-def update_profile_email():
+def update_profile_last_name(id):
+    lname = get_text_input("Enter the new last name")
+    update_userinfo_field(id, "last_name", lname)
+
+def update_profile_email(id):
     email = get_email_input('Enter your new email')
     if email_confirm(email):
         print("Success!")
-        #update account
+        update_userinfo_field(id, "email", email)
     else:
         print("Sorry, we could not verify that email address.")
 
-def update_profile_age():
+def update_profile_age(id):
     age = get_number_input("Enter your new age", 0, 1000)
-    #update account
+    update_userinfo_field(id, "age", age)
 
-def update_profile_password():
+def update_profile_password(id):
     email = "" #get email from database
     print("\nBefore updating your password, we must perform quick security check.")
     if email_confirm(email):
         print("Success!")
         print()
         password = get_new_password("Enter your new password:")
-        #update account
+        update_userinfo_field(id, "password", password)
     else:
         print("Sorry, we could not verify that email address.")
 
