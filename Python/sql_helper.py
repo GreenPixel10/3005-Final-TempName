@@ -3,7 +3,7 @@ from input_helper import int_to_day
 from datetime import date
 
 #replace with your db information
-DB_NAME = "GymClubData2"
+DB_NAME = "GymClubData"
 DB_USER = "projuser"
 DB_PASS = "projuser"
 DB_HOST = "localhost"
