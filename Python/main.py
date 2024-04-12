@@ -8,7 +8,7 @@ from sql_helper import *
 from admin import *
 
 
-debug = True
+debug = False
 
 def __main__():
      id = 1
