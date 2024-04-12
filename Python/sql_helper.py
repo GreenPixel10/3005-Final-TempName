@@ -311,7 +311,10 @@ def get_weights(id):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     cur.execute("SELECT weight FROM Exercise WHERE member_id = {} ORDER BY date".format(id))
-    wights = cur.fetchall()
+    w = cur.fetchall()
+    weights = []
+    for i in w:
+        weights.append(i[0])
     cur.close()
     conn.close()
     return weights
@@ -366,6 +369,16 @@ def buy_session(id, session_id):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     query = "INSERT INTO Signed_up_for (member_id, session_id, date) VALUES ({}, {}, '{}')".format(id, session_id, date.today())
+    cur.execute(query)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+def log_exercise(id, desc, d, t, bp, hr, w):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "INSERT INTO Exercise (member_id, description, date, time, blood_pressure, heartrate_avg, weight) VALUES ({}, '{}', '{}', '{}', {}, {}, {})".format(id, desc, d, t, bp, hr, w)
     cur.execute(query)
     conn.commit()
     cur.close()

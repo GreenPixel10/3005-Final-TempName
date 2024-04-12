@@ -118,7 +118,7 @@ def get_time_input(prompt, with_seconds = False):
 def get_bool_input(prompt):
      print(prompt)
      choice = get_text_input("Yes or No: ")
-     if choice == "yes" or choice == "Yes":
+     if choice == "yes" or choice == "Yes" or choice == "Y" or choice == "y":
           return True
      else:
           return False

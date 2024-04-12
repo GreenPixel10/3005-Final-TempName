@@ -1,5 +1,6 @@
 from input_helper import *
 from sql_helper import *
+from datetime import date, time, datetime
 import random
 
 
@@ -106,8 +107,32 @@ def update_goal():
 def delete_goal():
     pass
 
+def exercise_logging(id):
+
+    print_exercise(id)
+    print()
+
+    if not get_bool_input("Would you like to enter a new exercise?"):
+        return
 
 
 
-def exercise_logging():
-    pass
+
+
+    desc = get_text_input("Please describe your exercise", 255)
+    d = date.today()
+    t = datetime.now().time()
+    bp = get_number_input("Enter your blood pressure reading")
+    hr = get_number_input("Enter your average heart rate reading")
+    w = get_number_input("Enter your weight")
+
+    log_exercise(id, desc, d, t, bp, hr, w)
+
+
+
+
+
+
+
+
+    ##

@@ -10,12 +10,7 @@ def dashboard(id):
      input("Press enter to return to the main menu")
 
 def display_excercises(id):
-     ex = get_excercises()
-     if not ex:
-         print("You have no exercises to show")
-         return
-     for i in ex:
-          print(i)
+     print_exercise(id)
 
 def display_current_bests(id):
     pass
@@ -25,7 +20,8 @@ def display_health_stats(id):
     #print(type(bp[0][0]))
     print("Your average blood pressure is", int(bp[0][0]))
     print("Your average heart rate is", int(hr[0][0]))
-    #draw_graph(get_weights()[10:], 10)
+    w = get_weights(id)
+    draw_graph(w, 10)
 
 #################
 ###sql helpers###

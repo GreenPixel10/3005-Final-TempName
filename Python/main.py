@@ -8,7 +8,7 @@ from sql_helper import *
 from admin import *
 
 
-debug = True
+debug = False
 
 def __main__():
      id = 1
@@ -59,7 +59,7 @@ def __main__():
                    match choice:
                         case 0: update_personal_info(id)
                         case 1: fitness_goals(id)
-                        case 2: exercise_logging()
+                        case 2: exercise_logging(id)
                         case 3: dashboard(id)
                         case 4: schedule_management(id)
                         case 5: break
