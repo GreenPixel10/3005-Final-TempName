@@ -11,14 +11,14 @@ INSERT INTO Admin (admin_id,first_name, last_name, email, password) VALUES
 (1,'Neo', 'FromTheMatix', 'neo.fromthematrix@example.com', 'color 0A'),
 (2,'Walter', 'White', 'walter.white@example.com', 'jesseFan37');
 
-INSERT INTO FitnessGoal (member_id, current_best, goal_value, type_of_goal) VALUES
-(1, 4500, 5000, 'Run Distance in 20 minutes (metres)'),
-(2, 3000, 6000, 'Run Distance in 20 minutes (metres)'),
-(3, 2850, 3000, 'Run Distance in 20 minutes (metres)'),
-(1, 40, 50, 'Swim Distance (laps)'),
-(2, 57, 60, 'Swim Distance (laps)'),
-(3, 166, 180, 'Bench Press Weight (lb)'),
-(2, 200, 215, 'Bench Press Weight (lb)');
+INSERT INTO FitnessGoal (goal_id, member_id, current_best, goal_value, type_of_goal) VALUES
+(1, 1, 4500, 5000, 'Run Distance in 20 minutes (metres)'),
+(2, 2, 3000, 6000, 'Run Distance in 20 minutes (metres)'),
+(3, 3, 2850, 3000, 'Run Distance in 20 minutes (metres)'),
+(4, 1, 40, 50, 'Swim Distance (laps)'),
+(5, 2, 57, 60, 'Swim Distance (laps)'),
+(6, 3, 166, 180, 'Bench Press Weight (lb)'),
+(7, 2, 200, 215, 'Bench Press Weight (lb)');
 
 INSERT INTO Exercise (member_id, description, date, time, blood_pressure, heartrate_avg, weight) VALUES
 (1, 'Ran 5km', '2024-04-07', '06:27:00', 110, 100, 150),
@@ -125,6 +125,7 @@ INSERT INTO Unavailability (trainer_id, timeslot_id) VALUES
 ALTER SEQUENCE Timeslot_timeslot_id_seq RESTART WITH 71;
 ALTER SEQUENCE Session_session_id_seq RESTART WITH 13;
 ALTER SEQUENCE Room_room_id_seq RESTART WITH 6;
+ALTER SEQUENCE FitnessGoal_goal_id_seq RESTART WITH 8;
 ALTER SEQUENCE Member_member_id_seq RESTART WITH 4;
 ALTER SEQUENCE Trainer_trainer_id_seq RESTART WITH 3;
 ALTER SEQUENCE Admin_admin_id_seq RESTART WITH 3;

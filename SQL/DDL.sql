@@ -32,6 +32,7 @@ CREATE TABLE Admin (
 
 
 CREATE TABLE FitnessGoal (
+    goal_id SERIAL PRIMARY KEY,
     member_id INTEGER, --FOREIGN KEY
     current_best FLOAT,
     goal_value FLOAT,
