@@ -4,7 +4,6 @@ Scott Chapman 101233571, Evan Raz 101239518
 https://github.com/GreenPixel10/3005-Final-TempName
 
 FULL DEMO VIDEO: https://youtu.be/qn0QalwYnpk
-Individual video sections can also be found in the videos directory of the repository
 
 To run:
 install python 3.12.2 or python 3.10.7 (other versions are untested)
