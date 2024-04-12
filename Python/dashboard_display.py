@@ -10,17 +10,23 @@ def dashboard(id):
      input("Press enter to return to the main menu")
 
 def display_excercises(id):
-     print_exercise(id)
+    print("\nHere is your exercise log:")
+    print_exercise(id)
 
 def display_current_bests(id):
-    pass
+    print("\nHere are some of your completed goals!")
+    goals = get_goals(id, False)
+    display_goals(goals)
+    print()
 
 def display_health_stats(id):
     bp, hr = get_averages(id)
     #print(type(bp[0][0]))
+    print()
     print("Your average blood pressure is", int(bp[0][0]))
     print("Your average heart rate is", int(hr[0][0]))
     w = get_weights(id)
+    print("\nHere is your weight over the last 10 exercises:")
     draw_graph(w, 10)
 
 #################

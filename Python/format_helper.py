@@ -20,12 +20,12 @@ def draw_graph(data, height):
      print()
      for i in range(height, -1, -1):
           row = (i * mult) + data_min
-          print(str(int(row)).rjust(5), end = "")
+          print(str(int(row)).rjust(5), end = "|")
           for j in range(actual_width):
                if row <= data[j]:
                     print(" #", end = "")
                else:
                     print("  ", end = "")
-          print("", str(int(row)).ljust(5))
+          print(" |", str(int(row)).ljust(5))
      print()
      print()

@@ -8,7 +8,7 @@ from sql_helper import *
 from admin import *
 
 
-debug = False
+debug = True
 
 def __main__():
      id = 1
@@ -18,7 +18,7 @@ def __main__():
              id = 3
              perm = 3
          else:
-             choice = get_menu_input("What would you like to do?", ["Login", "Register", "Exit"])
+             choice = get_menu_input("\nWhat would you like to do?", ["Login", "Register", "Exit"])
 
              match choice:
                   case 0:
@@ -34,7 +34,7 @@ def __main__():
              #when a admin logs in
              if perm == 1:
 
-                   choice = get_menu_input("What would you like to do?", ["Room Booking Management","Monitor Equipment","View Billing History", "Log Out"])
+                   choice = get_menu_input("\nWhat would you like to do?", ["Room Booking Management","Monitor Equipment","View Billing History", "Log Out"])
                    match choice:
                         case 0: manage_rooms()
                         case 1: monitor_equipment()
@@ -43,7 +43,7 @@ def __main__():
              #when a trainer logs in
              if perm == 2:
 
-                   choice = get_menu_input("What would you like to do?", ["Search Member", "View Unavailability", "Edit Unavaility", "Log Out"])
+                   choice = get_menu_input("\nWhat would you like to do?", ["Search Member", "View Unavailability", "Edit Unavaility", "Log Out"])
                    match choice:
                         case 0:
                              fname = get_text_input("What is their first name?")
@@ -55,7 +55,7 @@ def __main__():
 
              #when a member logs in
              if perm == 3:
-                   choice = get_menu_input("What would you like to access?", ["Personal information", "Fitness goals", "Exercise Logging", "Dashboard Display", "Schedule Management", "Log Out"])
+                   choice = get_menu_input("\nWhat would you like to access?", ["Personal information", "Fitness goals", "Exercise Logging", "Dashboard Display", "Schedule Management", "Log Out"])
                    match choice:
                         case 0: update_personal_info(id)
                         case 1: fitness_goals(id)

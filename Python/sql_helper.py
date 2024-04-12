@@ -331,6 +331,15 @@ def get_goals(id, uncompleted = True):
     conn.close()
     return goals
 
+def display_goals(goals):
+
+    if len(goals) == 0:
+        print("You have no goals set!\n")
+        return
+    for g in range(len(goals)):
+        print(str(g+1)+">", "{}: Target {}, Current Best {}".format(goals[g][4], goals[g][3], goals[g][2]))
+    print()
+
 
 def add_goal_sql(id, type, val):
 
@@ -380,6 +389,22 @@ def log_exercise(id, desc, d, t, bp, hr, w):
     cur = conn.cursor()
     query = "INSERT INTO Exercise (member_id, description, date, time, blood_pressure, heartrate_avg, weight) VALUES ({}, '{}', '{}', '{}', {}, {}, {})".format(id, desc, d, t, bp, hr, w)
     cur.execute(query)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def update_goal_sql(goal_id, new_target, field):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("UPDATE fitnessgoal SET {} = '{}' WHERE goal_id = {}".format(field, new_target, goal_id))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def delete_goal_sql(goal_id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("DELETE FROM fitnessgoal WHERE goal_id = {}".format(goal_id))
     conn.commit()
     cur.close()
     conn.close()

@@ -125,7 +125,7 @@ INSERT INTO Unavailability (trainer_id, timeslot_id) VALUES
 ALTER SEQUENCE Timeslot_timeslot_id_seq RESTART WITH 71;
 ALTER SEQUENCE Session_session_id_seq RESTART WITH 13;
 ALTER SEQUENCE Room_room_id_seq RESTART WITH 6;
-ALTER SEQUENCE FitnessGoal_goal_id_seq RESTART WITH 8;
+ALTER SEQUENCE FitnessGoal_goal_id_seq RESTART WITH 20;
 ALTER SEQUENCE Member_member_id_seq RESTART WITH 4;
 ALTER SEQUENCE Trainer_trainer_id_seq RESTART WITH 3;
 ALTER SEQUENCE Admin_admin_id_seq RESTART WITH 3;

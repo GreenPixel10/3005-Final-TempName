@@ -78,21 +78,11 @@ def fitness_goals(id):
             case 0:
                 add_goal(id)
             case 1:
-                update_goal()
+                update_goal(goals)
             case 2:
-                delete_goal()
+                delete_goal(goals)
             case 3:
                 return
-
-
-def display_goals(goals):
-
-    if len(goals) == 0:
-        print("You have no goals set!\n")
-        return
-    for g in range(len(goals)):
-        print(str(g)+">", "{}: Target {}, Current Best {}".format(goals[g][3], goals[g][2], goals[g][1]))
-    print()
 
 
 def add_goal(id):
@@ -101,11 +91,14 @@ def add_goal(id):
     add_goal_sql(id, type, val)
     print()
 
-def update_goal():
-    pass #should we include this
+def update_goal(goals):
+    choice = get_number_input("Enter the number of the goal you would like to update", 1, len(goals))
+    val = get_number_input("Enter your new target, and we will update your goal", 1, 1000000000)
+    update_goal_sql(goals[choice - 1][0], val, "goal_value")
 
-def delete_goal():
-    pass
+def delete_goal(goals):
+    choice = get_number_input("Enter the number of the goal you would like to delete", 1, len(goals))
+    delete_goal_sql(goals[choice - 1][0])
 
 def exercise_logging(id):
 
@@ -127,6 +120,28 @@ def exercise_logging(id):
     w = get_number_input("Enter your weight")
 
     log_exercise(id, desc, d, t, bp, hr, w)
+    print("\nHere are some goals you've been working towards:")
+    goals = get_goals(id)
+    display_goals(goals)
+
+    if not get_bool_input("Did this exercise work towards a goal?"):
+        return
+
+
+    choice = get_number_input("Enter the number of the goal you would like to update", 1, len(goals))
+    val = get_number_input("Enter the new goal value")
+    selected = goals[choice - 1]
+    prev_best = selected[2]
+    target = selected[3]
+    if prev_best >= val:
+        print("Unfortunately you havn't beat your previous best, but don't give up!")
+        return
+
+    update_goal_sql(selected[0], val, "current_best")
+    print("Goal updated!")
+
+    if val >= target:
+        print("You've reached your goal! Awesome work!")
 
 
 
