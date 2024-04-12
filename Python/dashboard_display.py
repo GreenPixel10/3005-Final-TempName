@@ -17,7 +17,6 @@ def display_current_bests(id):
     print("\nHere are some of your completed goals!")
     goals = get_goals(id, False)
     display_goals(goals)
-    print()
 
 def display_health_stats(id):
     bp, hr = get_averages(id)
@@ -26,7 +25,7 @@ def display_health_stats(id):
     print("Your average blood pressure is", int(bp[0][0]))
     print("Your average heart rate is", int(hr[0][0]))
     w = get_weights(id)
-    print("\nHere is your weight over the last 10 exercises:")
+    print("\nHere is your weight over your recent exercises:")
     draw_graph(w, 10)
 
 #################

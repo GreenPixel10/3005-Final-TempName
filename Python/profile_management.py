@@ -8,8 +8,9 @@ def update_personal_info(id):
     print()
     options = ["First name", "Last Name", "Email", "Password", "Age", "Cancel (Go Back)"]
     while True:
+        print()
         print_member_info(id)
-        choice = get_menu_input("What would you like to update?", options)
+        choice = get_menu_input("\nWhat would you like to update?", options)
 
         match choice:
             case 0:

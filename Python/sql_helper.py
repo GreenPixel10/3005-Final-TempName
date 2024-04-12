@@ -36,7 +36,7 @@ def get_id_from_name(fname,lname,table):
     conn.close()
     if not ret_id: return 0
     ret_id = ret_id[0]
-    
+
     return ret_id
 
 def check_creds(email,password,table):
@@ -188,7 +188,7 @@ def get_room_id_from_name(name):
     conn.close()
     if not ret_id: return 0
     ret_id = ret_id[0]
-    
+
     return ret_id
 
 def get_room_name_from_id(id):
@@ -336,7 +336,7 @@ def get_goals(id, uncompleted = True):
     return goals
 
 def display_goals(goals):
-
+    print()
     if len(goals) == 0:
         print("You have no goals set!\n")
         return
@@ -382,6 +382,15 @@ def buy_session(id, session_id):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
     query = "INSERT INTO Signed_up_for (member_id, session_id, date) VALUES ({}, {}, '{}')".format(id, session_id, date.today())
+    cur.execute(query)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def cancel_session(id, session_id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "DELETE FROM Signed_up_for WHERE member_id = {} AND session_id = {}".format(id, session_id)
     cur.execute(query)
     conn.commit()
     cur.close()
