@@ -100,5 +100,5 @@ CREATE TABLE Signed_up_for (
     session_id INTEGER,
     date DATE,
     FOREIGN KEY (member_id) REFERENCES Member(member_id),
-    FOREIGN KEY (session_id) REFERENCES Session(session_id)
+    FOREIGN KEY (session_id) REFERENCES Session(session_id) ON DELETE CASCADE
 );
