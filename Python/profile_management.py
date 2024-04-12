@@ -63,20 +63,19 @@ def email_confirm(address):
     return get_text_input("Enter the code to continue")
 
 
-def fitness_goals():
+def fitness_goals(id):
     print()
     options = ["Add Goal", "Update Goal", "Delete Goal", "Cancel (Go Back)"]
     options_limited = ["Add Goal", "Cancel (Go Back)"]
     while True:
-        #select * from goals where id = id
-        goals = []
+        goals = get_goals(id)
         display_goals(goals)
 
         choice = get_menu_input("What would you like to do?", options if len(goals) > 0 else options_limited)
 
         match choice:
             case 0:
-                add_goal()
+                add_goal(id)
             case 1:
                 update_goal()
             case 2:
@@ -90,16 +89,16 @@ def display_goals(goals):
     if len(goals) == 0:
         print("You have no goals set!\n")
         return
-
     for g in range(len(goals)):
-        print(str(g)+":", goals[g][0], goals[g][0], goals[g][0]) #update with proper formatting
+        print(str(g)+">", "{}: Target {}, Current Best {}".format(goals[g][3], goals[g][2], goals[g][1]))
     print()
 
 
-def add_goal():
+def add_goal(id):
     type = get_text_input("What type of goal are you setting (e.g. \"Pounds deadlifted\")", 100)
     val = get_number_input("What value are you aiming for (e.g. \"150\")", 1, 1000000000)
-    #add
+    add_goal_sql(id, type, val)
+    print()
 
 def update_goal():
     pass #should we include this
@@ -107,5 +106,8 @@ def update_goal():
 def delete_goal():
     pass
 
-def excercise_logging():
+
+
+
+def exercise_logging():
     pass

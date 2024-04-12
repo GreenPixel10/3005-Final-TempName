@@ -1,6 +1,7 @@
 import psycopg2
 from input_helper import int_to_day
 from datetime import date
+
 #replace with your db information
 DB_NAME = "GymClubData2"
 DB_USER = "projuser"
@@ -167,11 +168,13 @@ def print_sessions():
     cur.execute("SELECT * FROM Session")
     rows = cur.fetchall()
     for info in rows:
-        session_id, trainer_id, room_id, time_id, group, price = info
-        time, day = get_timeslot_from_id(time_id)
-        print("Session Id: " + str(session_id) + " | Trainer Id: " + str(trainer_id) + " | Room_Id: "+ str(room_id) + " | Date: " + int_to_day(day) + " | Time: " + str(time) + " | Group: " + str(group) + " | Price: " + str(price))
+        #session_id, trainer_id, room_id, time_id, group, price = info
+        #time, day = get_timeslot_from_id(time_id)
+        display_session(info, True)
+        #print("Session Id: " + str(session_id) + " | Trainer Id: " + str(trainer_id) + " | Room_Id: "+ str(room_id) + " | Date: " + int_to_day(day) + " | Time: " + str(time) + " | Group: " + str(group) + " | Price: " + str(price))
     cur.close()
     conn.close()
+    return len(info)
 
 def get_room_id_from_name(name):
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
@@ -183,6 +186,27 @@ def get_room_id_from_name(name):
     cur.close()
     conn.close()
     return ret_id
+
+def get_room_name_from_id(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+
+    cur.execute("SELECT name FROM Room WHERE room_id = '{}'".format(id))
+    ret_name = cur.fetchone()
+    ret_name = ret_name[0]
+    cur.close()
+    conn.close()
+    return ret_name
+
+def get_trainer_from_id(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+
+    cur.execute("SELECT first_name, last_name FROM Trainer WHERE trainer_id = '{}'".format(id))
+    t = cur.fetchone()
+    cur.close()
+    conn.close()
+    return t
 
 
 def create_session(trainer_id,room_id,timeslot_id,group,price):
@@ -265,6 +289,84 @@ def update_userinfo_field(id, field, value):
     cur = conn.cursor()
     cur.execute("UPDATE Member SET {} = '{}' WHERE member_id = {}".format(field, value, id))
 
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+def get_averages(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("SELECT AVG(blood_pressure)FROM Exercise WHERE member_id = {}".format(id))
+    avg_bp = cur.fetchall()
+    cur.execute("SELECT AVG(heartrate_avg)FROM Exercise WHERE member_id = {}".format(id))
+    avg_hr = cur.fetchall()
+    cur.close()
+    conn.close()
+
+
+    return avg_bp, avg_hr
+
+def get_weights(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("SELECT weight FROM Exercise WHERE member_id = {} ORDER BY date".format(id))
+    wights = cur.fetchall()
+    cur.close()
+    conn.close()
+    return weights
+
+def get_excercises():
+    pass #get all excercises from database
+
+def get_goals(id, uncompleted = True):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM FitnessGoal WHERE member_id = {} AND current_best {} goal_value".format(id, "<" if uncompleted else ">="))
+    goals = cur.fetchall()
+    cur.close()
+    conn.close()
+    return goals
+
+
+def add_goal_sql(id, type, val):
+
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "INSERT INTO FitnessGoal (member_id, current_best, goal_value, type_of_goal) VALUES ({}, 0, {}, '{}')".format(id, val, type)
+    cur.execute(query)
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+def get_sessions(id):
+
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "SELECT session_id, trainer_id, room_id, timeslot_id, group_session, price FROM (signed_up_for NATURAL JOIN session) WHERE member_id = {}".format(id)
+    cur.execute(query)
+    sessions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return sessions
+
+def display_session(s, show_ID = False): #session_id, trainer_id, room_id, timeslot_id, group_session, price
+    ts = get_timeslot_from_id(s[3])
+    t = get_trainer_from_id(s[1])
+    if show_ID: print(str(s[0]) + ": ", end = " ")
+    print("Group session" if s[4] else "Solo session", end = " ")
+    print("every {} at {}".format(int_to_day(ts[1]), ts[0]), end = " ")
+    print("in the", get_room_name_from_id(s[2]), "room,", end = " ")
+    print("with trainer", t[0], t[1], "(${})".format(s[5]))
+
+
+def buy_session(id, session_id):
+
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "INSERT INTO Signed_up_for (member_id, session_id, date) VALUES ({}, {}, '{}')".format(id, session_id, date.today())
+    cur.execute(query)
     conn.commit()
     cur.close()
     conn.close()

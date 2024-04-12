@@ -1,3 +1,6 @@
+
+from input_helper import int_to_day
+
 def format_date(date): #pass in (y,m,d)
      return months[date[1] - 1] + " " + str(date[2]) + ", " + str(date[0])
 
@@ -13,7 +16,7 @@ def draw_graph(data, height):
      data_range = data_max - data_min
      mult = data_range / height
      actual_width = len(data)
-     
+
      print()
      for i in range(height, -1, -1):
           row = (i * mult) + data_min
@@ -26,8 +29,3 @@ def draw_graph(data, height):
           print("", str(int(row)).ljust(5))
      print()
      print()
-
-     
-
-
-
