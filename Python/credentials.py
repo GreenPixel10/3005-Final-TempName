@@ -37,5 +37,5 @@ def loginUser(id):
         choice = get_menu_input("Username or Password is incorrect.", ["Create a New User", "Try Again"])
 
         match choice:
-            case 0: return 0
+            case 0: return 0, id
             case 1: continue
