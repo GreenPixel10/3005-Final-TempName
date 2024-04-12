@@ -21,14 +21,21 @@ def manage_rooms():
                     if room_id == 0: 
                         print("That room does not exist, try again:")
                     else: break
-                time = get_time_input("What time do you want it to take place at?")
-                date = get_number_input("What date do you want it to take place on? (1-7 starting on monday)",1 , 7)
+                while True:
+                    time = get_time_input("What time do you want it to take place at?")
+                    date = get_number_input("What date do you want it to take place on? (1-7 starting on monday)",1 , 7)
 
-                #see if this timeslot exists
-                #if it doesnt, create one
-                time_id = get_timeslot(time, date)
-                if time_id == 0:
-                    time_id = create_timeslot(time, date)
+                    #see if this timeslot exists
+                    #if it doesnt, create one
+                    time_id = get_timeslot(time, date)
+                    if time_id == 0:
+                        time_id = create_timeslot(time, date)
+                        break
+                    else: 
+                        if not check_availibility(trainer_id, time_id):
+                            print("That Trainer is unvailable at that time, try a diffrent time: ")
+                        else: break
+
 
                 group = get_bool_input("Will this be a group session?")
                 price = get_number_input("How much does it cost?")
@@ -37,8 +44,11 @@ def manage_rooms():
                 create_session(trainer_id,room_id,time_id,group,price) 
 
             case 2:
-                print_sessions()
-                session_id = get_text_input("What is the id of the session you would like to update?")
+                while True:
+                    print_sessions()
+                    session_id = get_text_input("What is the id of the session you would like to update?")
+                    if check_if_session_exists(session_id): break
+                    else: print("No session with that id. Try again:")
 
                 choice2 = get_menu_input("What part would you like to update:",["Trainer","Room","Timeslot","Group Session","Price"])
                 match choice2:
@@ -60,11 +70,19 @@ def manage_rooms():
                                 print("That room does not exist, try again:")
                             else: break
                     case 2: 
-                        time = get_time_input("Enter new time:")
-                        date = get_number_input("Enter new date: (1-7 starting on monday)", 1, 7)
-                        time_id = get_timeslot(time, date)
-                        if time_id == 0:
-                            time_id = create_timeslot(time, date)
+                        while True:
+                            time = get_time_input("Enter new time:")
+                            date = get_number_input("Enter new date: (1-7 starting on monday)", 1, 7)
+                            time_id = get_timeslot(time, date)
+                            if time_id == 0:
+                                time_id = create_timeslot(time, date)
+                                break
+                            else: 
+                                #get the trainer id for the current session
+                                t_id = get_trainer_from_session(session_id)
+                                if not check_availibility(t_id, time_id):
+                                    print("That Trainer is unvailable at that time, try a diffrent time: ")
+                                else: break
                         newVal = time_id
                         updateMe = "timeslot_id"
                     case 3: 
@@ -76,7 +94,11 @@ def manage_rooms():
                 #sql update based on newVal and updateme
                 session_update(session_id,newVal,updateMe)
             case 3:
-                session_id = get_number_input("What is the id of the session you want to remove?")
+                while True:
+                    print_sessions()
+                    session_id = get_text_input("What is the id of the session you would like to update?")
+                    if check_if_session_exists(session_id): break
+                    else: print("No session with that id. Try again:")
                 #remove the session from id
                 remove_session(session_id)
             case 4: break

@@ -283,6 +283,43 @@ def print_signed_up_for():
     conn.close()
 
 
+def check_availibility(id, time_id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM unavailability WHERE trainer_id = '{}' AND timeslot_id = '{}'".format(id, time_id))
+    returns = cur.fetchall()
+    cur.close()
+    conn.close()
+    if returns: return False
+    return True
+
+def get_trainer_from_session(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+
+    cur.execute("SELECT trainer_id FROM session WHERE session_id = '{}'".format(id))
+    returns = cur.fetchall()
+    cur.close()
+    conn.close()
+    returns = returns[0]
+    return returns[0]
+
+
+def check_if_session_exists(id):
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+
+    cur.execute("SELECT * FROM session WHERE session_id = '{}'".format(id))
+    returns = cur.fetchall()
+    cur.close()
+    conn.close()
+    if returns: return True
+    return False
+
+
+
+
 
     #########
 
