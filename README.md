@@ -1,12 +1,17 @@
-# 3005-Final-TempName
+# 3005 Final Project
+Scott Chapman 101233571, Evan Raz 101239518
 
+https://github.com/GreenPixel10/3005-Final-TempName
+
+FULL DEMO VIDEO: https://youtu.be/qn0QalwYnpk
+Individual video sections can also be found in the videos directory of the repository
 
 To run:
 install python 3.12.2 or python 3.10.7 (other versions are untested)
 create a data base called GymClubData in pgAdmin 4
 run the ddl.sql file in the query part of the database
 then run the dml.sql file in the query part of the database
-in sql_helper.py, change the 
+in sql_helper.py, change the
     DB_NAME = "GymClubData"
     DB_USER = "projuser"
     DB_PASS = "projuser"
