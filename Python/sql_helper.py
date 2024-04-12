@@ -32,9 +32,11 @@ def get_id_from_name(fname,lname,table):
         exit()
     cur.execute("SELECT {} FROM {} WHERE first_name = '{}' AND last_name = '{}'".format(id, table, fname, lname))
     ret_id = cur.fetchone()
-    ret_id = ret_id[0]
     cur.close()
     conn.close()
+    if not ret_id: return 0
+    ret_id = ret_id[0]
+    
     return ret_id
 
 def check_creds(email,password,table):
@@ -182,9 +184,11 @@ def get_room_id_from_name(name):
 
     cur.execute("SELECT room_id FROM Room WHERE name = '{}'".format(name))
     ret_id = cur.fetchone()
-    ret_id = ret_id[0]
     cur.close()
     conn.close()
+    if not ret_id: return 0
+    ret_id = ret_id[0]
+    
     return ret_id
 
 def get_room_name_from_id(id):
@@ -242,7 +246,7 @@ def print_equipment():
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM equipment")
+    cur.execute("SELECT * FROM equipment ORDER BY date_of_last_maintenance")
     returns = cur.fetchall()
 
     for info in returns:
@@ -268,7 +272,7 @@ def print_signed_up_for():
     conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM signed_up_for")
+    cur.execute("SELECT * FROM signed_up_for ORDER BY date DESC")
     returns = cur.fetchall()
 
     for info in returns:

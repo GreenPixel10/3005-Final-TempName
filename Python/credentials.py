@@ -19,11 +19,6 @@ def createUser(id):
 def loginUser(id):
     while(True):
         email = get_email_input("Enter Email Address: ")
-        if(email == "trainertest@gmail.com"):
-            return 2
-        if(email == "membertest@gmail.com"):
-            return 3
-
         password = get_text_input("Enter Password: ")
 
         check = check_creds(email,password,"Admin")

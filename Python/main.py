@@ -8,7 +8,7 @@ from sql_helper import *
 from admin import *
 
 
-debug = True
+debug = False
 
 def __main__():
      id = 1
@@ -45,10 +45,7 @@ def __main__():
 
                    choice = get_menu_input("\nWhat would you like to do?", ["Search Member", "View Unavailability", "Edit Unavaility", "Log Out"])
                    match choice:
-                        case 0:
-                             fname = get_text_input("What is their first name?")
-                             lname = get_text_input("What is their last name?")
-                             search_member(fname, lname)
+                        case 0: search_member(id)
                         case 1: view_unavailibility(id)
                         case 2: edit_unavailibility(id)
                         case 3: break

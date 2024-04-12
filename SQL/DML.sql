@@ -37,8 +37,8 @@ INSERT INTO Room (room_id,name) VALUES
 (1,'weight'),
 (2,'treadmill'),
 (3,'pool'),
-(4,'openRoom1'),
-(5,'openRoom2');
+(4,'class'),
+(5,'spin');
 
 INSERT INTO Equipment (equipment_serial, equipment_type, room_id, date_of_last_maintenance) VALUES
 (123451, 'Treadmill', 2, '2023-09-12'),
