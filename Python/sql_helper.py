@@ -367,6 +367,18 @@ def get_sessions(id):
     conn.close()
     return sessions
 
+
+def get_free_sessions(id):
+
+    conn = psycopg2.connect(database=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+    cur = conn.cursor()
+    query = "SELECT session_id, trainer_id, room_id, timeslot_id, group_session, price FROM session WHERE  ((group_session = True AND session_id NOT IN (SELECT session_id FROM signed_up_for WHERE member_id = {})) OR session_id NOT IN (SELECT session_id FROM signed_up_for))".format(id)
+    cur.execute(query)
+    sessions = cur.fetchall()
+    cur.close()
+    conn.close()
+    return sessions
+
 def display_session(s, show_ID = False): #session_id, trainer_id, room_id, timeslot_id, group_session, price
     ts = get_timeslot_from_id(s[3])
     t = get_trainer_from_id(s[1])

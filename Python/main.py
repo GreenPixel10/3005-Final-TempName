@@ -8,14 +8,14 @@ from sql_helper import *
 from admin import *
 
 
-debug = False
+debug = True
 
 def __main__():
      id = 1
      while True:
 
          if debug:
-             id = 3
+             id = 1
              perm = 3
          else:
              choice = get_menu_input("\nWhat would you like to do?", ["Login", "Register", "Exit"])

@@ -31,13 +31,17 @@ def display_sessions(id):
 
 
 def add_session(id):
-    num_sessions = print_sessions()
-    if num_sessions == 0:
-        print("No sessions for you!")
+    sessions = get_free_sessions(id)
+    if len(sessions) == 0:
+        print("There are no free sessions, sorry!")
         return
 
-    choice = get_number_input("Enter an ID to sign up for that session")
-    buy_session(id, choice)
+    for s in range(len(sessions)):
+        print(s+1, ">", end = "")
+        display_session(sessions[s])
+
+    choice = get_number_input("Enter an ID to sign up for that session", 1, len(sessions))
+    buy_session(id, sessions[choice-1][0])
     print("Billing...")
     print("Transaction successful!")
 
